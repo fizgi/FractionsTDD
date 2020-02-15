@@ -163,7 +163,7 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(f34 >= f24, True)
 
     def test_simplify(self):
-        """ verify Fraction greater than or equal """
+        """ verify Fraction.simpligy() method"""
         self.assertTrue(str(Fraction(3, 10).simplify()) == str(Fraction(3, 10)))
         self.assertTrue(str(Fraction(9, 27).simplify()) == str(Fraction(1, 3)))
         self.assertTrue(str(Fraction(8, 12).simplify()) == str(Fraction(2, 3)))
