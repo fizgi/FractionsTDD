@@ -27,7 +27,7 @@ class Fraction:
 
     def __str__(self) -> str:
         """ return a String to display fractions """
-        return f"{self.num}/{self.denom}"
+        return f"{float(self.num)}/{float(self.denom)}"
 
     def __add__(self, other: "Fraction") -> "Fraction":
         """ Add two fractions using simplest approach.
@@ -133,6 +133,26 @@ class Fraction:
         else:
             return False
 
+    def simplify(self) -> "Fraction":
+        """ Simplify fractions by finding the Greatest Common Factor (GCF)
+            and then dividing the number and denominator.
+        """
+
+        def gcd(a, b): # a function to find the gcd
+            while b != 0:
+                (a, b) = (b, a%b)
+            return a
+
+        gcf: int = gcd(int(self.num), int(self.denom))
+
+        start: int = min(abs(int(self.num)), abs(int(self.denom)))
+
+        for number in range(start, 2, -1):
+            if number % gcf:
+                return Fraction(float(self.num / gcf), float(self.denom / gcf))
+
+        return Fraction(float(self.num), float(self.denom))
+
 
 def get_number(prompt: str) -> float:
     """ read and return a number from the user.
@@ -161,6 +181,7 @@ def get_fraction(count: int) -> Fraction:
         fraction: Fraction = Fraction(num, denom)
 
         return fraction
+
 
 def compute(f1: Fraction, operator: str, f2: Fraction) -> None:
     """ Given two fractions and an operator, return the result

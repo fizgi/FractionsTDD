@@ -9,7 +9,7 @@
 """
 
 import unittest
-from HW03_Fatih_IZGI import Fraction
+from app import Fraction
 
 
 class TestFraction(unittest.TestCase):
@@ -29,7 +29,7 @@ class TestFraction(unittest.TestCase):
     def test_str(self):
         """ verify that __str__ works properly """
         f: Fraction = Fraction(1, 6)
-        self.assertEqual(str(f), "1/6")
+        self.assertEqual(str(f), "1.0/6.0")
 
     def test_add(self):
         """ verify Fraction addition """
@@ -161,6 +161,12 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(f25 >= f12, False)
         self.assertEqual(f12 >= f12, True)
         self.assertEqual(f34 >= f24, True)
+
+    def test_simplify(self):
+        """ verify Fraction greater than or equal """
+        self.assertTrue(str(Fraction(3, 10).simplify()) == str(Fraction(3, 10)))
+        self.assertTrue(str(Fraction(9, 27).simplify()) == str(Fraction(1, 3)))
+        self.assertTrue(str(Fraction(8, 12).simplify()) == str(Fraction(2, 3)))
 
 
 if __name__ == '__main__':
